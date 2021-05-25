@@ -1,0 +1,27 @@
+{
+  "name": "book-manager",
+  "version": "1.0.0",
+  "description": "book-manager app",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon ./server.js localhost 3080",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ImanPunia/book-manager.git"
+  },
+  "author": "Iman Punia",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ImanPunia/book-manager/issues"
+  },
+  "homepage": "https://github.com/ImanPunia/book-manager#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
