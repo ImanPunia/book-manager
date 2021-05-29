@@ -12,14 +12,12 @@ export class AppComponent implements OnInit{
   title = 'book-manager';
 
   constructor(public dialog: MatDialog, readonly connSer: httpConnectionService){ }
-  ngOnInit(): void {
-           }
-
-
+  ngOnInit(): void { }
 
   openDialog(): void{
     const   dialogRef  = this.dialog.open(AddBookDialogComponent,{width:'500px'});
 
+    //verify server request 
     this.connSer.printHelloWorld().subscribe((res)=> {
       console.log(res);
     })
