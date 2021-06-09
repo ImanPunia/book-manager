@@ -1,4 +1,11 @@
 const express = require('express');
+const con = require('./database/connection');
+
+//creates connection to database
+con.name.connect();
+
+//creates collection and insert document in same
+con.name.createDbCollection();
 
 const app = express(),
       bodyParser = require("body-parser");
