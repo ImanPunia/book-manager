@@ -1,5 +1,6 @@
 const express = require('express');
 const con = require('./database/connection');
+const router = require('./bookRouter/bookRouter');
 
 //creates connection to database
 con.name.connect();
@@ -11,14 +12,8 @@ const app = express(),
       bodyParser = require("body-parser");
       port = 3080;
 
-      app.get('/api/hello-world', (req, res) => {
-        res.send({"value":'Hello World!!!!!'})
-      })
-      
-      app.get('/', (req, res) => {
-        res.send('Hello World!')
-      })
-      
+      app.use('/book',router);
+
       app.listen(port, () => {
         console.log(`Example app listening at http://localhost:${port}`)
       })

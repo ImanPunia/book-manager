@@ -9,7 +9,7 @@ export class httpConnectionService {
 
   constructor(private http: HttpClient) { }
 
-  rootUrl = '/api';
+  rootUrl = '/book';
 
   printHelloWorld(){
     return this.http.get(this.rootUrl + '/hello-world');
