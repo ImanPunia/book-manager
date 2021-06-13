@@ -63,4 +63,4 @@ async function connect() {
     await client.close();
   }
 
-  exports.name = {connect , createDbCollection, closeConnection } ;
+  module.exports = connect;
