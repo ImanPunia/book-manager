@@ -2,16 +2,13 @@
 const connect =  require('./database/connection');
 const app = require('./app');
 
-function callBack(err,db){
-  if(err){
-    console.log('connection unsuuccessfull')
-  } else{
-    console.log('succesfull');
-  }
-  app.set('db',db.db().collection('Books'));
+//creates connection to database
+async function dbConnect(){
+  const db = await connect;
+  return db.collection('Books') ;
 }
 
-connect(callBack);
+app.set('db', dbConnect());
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)

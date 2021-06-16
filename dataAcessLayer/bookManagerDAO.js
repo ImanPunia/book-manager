@@ -4,16 +4,16 @@ class bookDao{
         this.client = client;
     }
 
-    async insertOneBook(book,callBack,res){
-            this.client.insertOne(book, (err,value) => {
-                if(!err) {
-                    const successMsg = 'Insertion successfull';
-                    callBack(undefined,successMsg,res);
+    async insertOneBook(book,handleSuccessError,res){
+        this.client.then(val => val.insertOne(book, (err,value) => {
+                if(err) {
+                    const errroMsg = 'Unable to insert document';
+                    handleSuccessError(errroMsg,undefined,res);
                 } else {
-                    const errroMsg = 'Insertion Failed' + err;
-                    callBack(errroMsg,undefined,res);
+                    const successMsg = 'Insertion successfull';
+                    handleSuccessError(undefined,successMsg,res);
                 }
-            });
+            }));
     }
 }
 

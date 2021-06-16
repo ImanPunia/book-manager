@@ -6,12 +6,10 @@ const client = new MongoClient(uri, {
   useUnifiedTopology: true,
 });
 
-async function connect(callBack){
-   await client.connect(callBack)
-}
+const db =   client.connect().then(dbClient => dbClient.db());
 
 async function closeConnection(){
   await client.close();
 }
 
-module.exports = connect;
+module.exports = db;
