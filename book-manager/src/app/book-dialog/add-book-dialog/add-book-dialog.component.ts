@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MatDialogRef} from '@angular/material/dialog';
-import { addBook } from 'src/app/Models/addBook';
+import { Book } from 'src/app/Models/Book';
 
 @Component({
   selector: 'app-add-book-dialog',
@@ -9,8 +9,9 @@ import { addBook } from 'src/app/Models/addBook';
 })
 export class AddBookDialogComponent implements OnInit {
 
-  public book: addBook = new addBook('','','','');
+  public book: Book = new Book('','','','', null);
 
+   fileName = '';
 
   constructor(public dialogRef: MatDialogRef<AddBookDialogComponent>) { }
 
@@ -18,7 +19,13 @@ export class AddBookDialogComponent implements OnInit {
 
   }
 
+  setFileName($event: any){
+    this.fileName = $event.target.files[0].name;
+
+  }
+
   addBook(){
     this.dialogRef.close(this.book);
   }
+
 }

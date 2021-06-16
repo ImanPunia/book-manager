@@ -12,13 +12,17 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { HttpClientModule } from '@angular/common/http';
+import { FileDirectiveDirective } from './directives/file-directive.directive';
+import {MatIconModule} from '@angular/material/icon';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
     InputComponent,
-    AddBookDialogComponent
+    AddBookDialogComponent,
+    FileDirectiveDirective
   ],
   imports: [
     BrowserModule,
@@ -29,7 +33,8 @@ import { HttpClientModule } from '@angular/common/http';
     MatInputModule,
     MatFormFieldModule,
     MatButtonModule,
-    HttpClientModule
+    HttpClientModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

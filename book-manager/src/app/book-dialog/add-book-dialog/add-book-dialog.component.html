@@ -26,6 +26,15 @@
         <input type="text" matInput [(ngModel)]="book.copies" name="copies">
       </mat-form-field>
     </div>
+    <div>
+        <label> Cover Photo: </label>
+        <input type="file" style='display: none;'   [(ngModel)]="book.files" (change)="setFileName($event)" name="files" appFileDirective #chooseFile>
+        {{ fileName || "No file is choosen" }}
+        <button mat-mini-fab type="button" color="primary" class="upload-btn"
+          (click)="chooseFile.click()">
+            <mat-icon>attach_file</mat-icon>
+        </button>
+    </div>
   </form>
 </mat-dialog-content>
 

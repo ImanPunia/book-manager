@@ -17,11 +17,6 @@ export class AppComponent implements OnInit{
   openDialog(): void{
     const   dialogRef  = this.dialog.open(AddBookDialogComponent,{width:'500px'});
 
-    //verify server request 
-    this.connSer.printHelloWorld().subscribe((res)=> {
-      console.log(res);
-    })
-
     dialogRef.afterClosed().subscribe((value) => {
         console.log(JSON.stringify(value));
     })
