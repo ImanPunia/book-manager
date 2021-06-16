@@ -1,12 +1,17 @@
 
-const con = require('./database/connection');
+const connect =  require('./database/connection');
 const app = require('./app');
 
-//creates connection to database
-con.name.connect();
+function callBack(err,db){
+  if(err){
+    console.log('connection unsuuccessfull')
+  } else{
+    console.log('succesfull');
+  }
+  app.set('db',db.db().collection('Books'));
+}
 
-//creates collection and insert document in same
-//con.name.createDbCollection();
+connect(callBack);
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)

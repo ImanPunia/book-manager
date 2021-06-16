@@ -1,9 +1,25 @@
+const app = require('../app');
+const BookDao = require('../dataAcessLayer/bookManagerDAO');
+const Book = require('../model/book')
 
-module.exports =  getBooks = (req,res) => {
-    return res.send(printMessage());
+function callBack(err,success,res){
+    if(err) {
+        return res.send(err)
+    } else {
+        return res.send(success)
+    }
 }
 
-function printMessage(){
-    return 'books are fetched successfully IMAN';
+function addBooks(req,res){
+    const bookData = req.body;
+    const book = new Book(bookData.name, bookData.author,bookData.volume,bookData.copies);
+    console.log(req.app.get('db'))
+    const bookDao = new BookDao(req.app.get('db'));
+    bookDao.insertOneBook(book,callBack,res);
 }
+
+module.exports = addBooks;
+
+
+
 
