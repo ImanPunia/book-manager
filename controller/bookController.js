@@ -16,8 +16,9 @@ function handleSuccessError(err,success,res){
  * @param {*} res response object
  */
 function addBooks(req,res){
-    const bookData = req.body;
-    const book = new Book(bookData.name, bookData.author,bookData.volume,bookData.copies);
+    const bookData = JSON.parse(req.body.data);
+    const fileData = req.file;
+    const book = new Book(bookData.name, bookData.author,bookData.volume,bookData.copies,fileData.originalname);
     const bookDao = new BookDao(req.app.get('db'));
     bookDao.insertOneBook(book,handleSuccessError,res);
 }

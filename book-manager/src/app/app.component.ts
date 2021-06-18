@@ -19,6 +19,12 @@ export class AppComponent implements OnInit{
 
     dialogRef.afterClosed().subscribe((value) => {
         console.log(JSON.stringify(value));
+        let formData = new FormData();
+        formData.append('file',value.file);
+        formData.append('data',JSON.stringify(value));
+        this.connSer.addSingleBook(formData,value).subscribe((res)=> {
+          console.log(res);
+        })
     })
   }
 

@@ -4,6 +4,6 @@ export class Book{
         public author: String, 
         public volume: String, 
         public copies: String,
-        public files: File | null) {
+        public file: File | null) {
     }
 }
