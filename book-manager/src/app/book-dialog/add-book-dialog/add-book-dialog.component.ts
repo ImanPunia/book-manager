@@ -21,7 +21,6 @@ export class AddBookDialogComponent implements OnInit {
 
   setFileName($event: any){
     this.fileName = $event.target.files[0].name;
-
   }
 
   addBook(){
