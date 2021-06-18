@@ -27,10 +27,10 @@
       </mat-form-field>
     </div>
     <div>
-        <label> Cover Photo: </label>
+        <label class="light-grey"> Cover Photo: </label>
         <input type="file" style='display: none;'   [(ngModel)]="book.file" (change)="setFileName($event)" name="file" appFileDirective #chooseFile>
         {{ fileName || "No file is choosen" }}
-        <button mat-mini-fab type="button" color="primary" class="upload-btn"
+        <button mat-mini-fab type="button" color="black"  class="bg-purple box-shadow-0"
           (click)="chooseFile.click()">
             <mat-icon>attach_file</mat-icon>
         </button>

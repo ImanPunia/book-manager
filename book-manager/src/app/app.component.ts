@@ -18,6 +18,7 @@ export class AppComponent implements OnInit{
     const   dialogRef  = this.dialog.open(AddBookDialogComponent,{width:'500px'});
 
     dialogRef.afterClosed().subscribe((value) => {
+      if(value != undefined){
         console.log(JSON.stringify(value));
         let formData = new FormData();
         formData.append('file',value.file);
@@ -25,6 +26,7 @@ export class AppComponent implements OnInit{
         this.connSer.addSingleBook(formData,value).subscribe((res)=> {
           console.log(res);
         })
+      }
     })
   }
 

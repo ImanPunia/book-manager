@@ -1,7 +1,22 @@
+$app-color : rgb(142 98 226 / 87%);
+$label-color: rgba(0, 0, 0, 0.54);
+
 mat-form-field {
     width : 100%;
 }
 
 .color-purple{
-    color: rgb(142 98 226 / 87%);
+    color: $app-color;
+}
+
+.bg-purple{
+    background : $app-color;
+}
+
+.box-shadow-0{
+    box-shadow: none;
+}
+
+.light-grey{
+    color: $label-color;
 }
