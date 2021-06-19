@@ -1,43 +1,56 @@
 <div mat-dialog-title class="color-purple">Add Book</div>
 
 <mat-dialog-content>
-  <form #bookForm = "ngForm" (ngSubmit)="addBook()">
+  <form #bookForm="ngForm" (ngSubmit)="addBook()">
     <div>
       <mat-form-field>
         <mat-label> Name: </mat-label>
-        <input type="text" matInput [(ngModel)] ="book.name" name="name">
+        <input type="text" matInput [(ngModel)]="book.name" name="name" />
       </mat-form-field>
     </div>
     <div>
       <mat-form-field>
         <mat-label> Author: </mat-label>
-        <input type="text" matInput   [(ngModel)]="book.author" name="author">
+        <input type="text" matInput [(ngModel)]="book.author" name="author" />
       </mat-form-field>
     </div>
     <div>
       <mat-form-field>
         <mat-label> Volume: </mat-label>
-        <input type="text" matInput [(ngModel)]="book.volume" name="volume">
+        <input type="text" matInput [(ngModel)]="book.volume" name="volume" />
       </mat-form-field>
     </div>
     <div>
       <mat-form-field>
         <mat-label> Copies: </mat-label>
-        <input type="text" matInput [(ngModel)]="book.copies" name="copies">
+        <input type="text" matInput [(ngModel)]="book.copies" name="copies" />
       </mat-form-field>
     </div>
     <div>
-        <label class="light-grey"> Cover Photo: </label>
-        <input type="file" style='display: none;'   [(ngModel)]="book.file" (change)="setFileName($event)" name="file" appFileDirective #chooseFile>
-        {{ fileName || "No file is choosen" }}
-        <button mat-mini-fab type="button" color="black"  class="bg-purple box-shadow-0"
-          (click)="chooseFile.click()">
-            <mat-icon>attach_file</mat-icon>
-        </button>
+      <label class="light-grey"> Cover Photo: </label>
+      <input
+        type="file"
+        style="display: none"
+        [(ngModel)]="book.file"
+        (change)="setFileName($event)"
+        name="file"
+        appFileDirective
+        #chooseFile
+      />
+      {{ fileName || "No file is choosen" }}
+      <button
+        mat-mini-fab
+        type="button"
+        color="black"
+        class="bg-purple box-shadow-0"
+        (click)="chooseFile.click()"
+      >
+        <mat-icon>attach_file</mat-icon>
+      </button>
     </div>
   </form>
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
-  <button mat-button class="color-purple" (click) ="addBook()">ADD</button>
+  <button mat-button class="color-purple" (click)="addBook()">ADD</button>
 </mat-dialog-actions>

@@ -5,21 +5,22 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   selector: 'app-input',
   templateUrl: './input.component.html',
   styleUrls: ['./input.component.scss'],
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    multi: true,
-    useExisting: InputComponent
-  }]
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      multi: true,
+      useExisting: InputComponent,
+    },
+  ],
 })
 export class InputComponent implements ControlValueAccessor {
+  @Input() value: any;
 
-  @Input() value:any;
-
-  onChange(value: any){ 
+  onChange(value: any) {
     this.value = value;
   }
 
-  constructor() { }
+  constructor() {}
 
   writeValue(value: any): void {
     this.value = value;
@@ -29,7 +30,5 @@ export class InputComponent implements ControlValueAccessor {
     this.onChange = fn;
   }
 
-  registerOnTouched(fn: any): void {  }
-
-
+  registerOnTouched(fn: any): void {}
 }

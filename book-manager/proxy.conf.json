@@ -1,6 +1,6 @@
 {
-    "/book": {
-      "target": "http://localhost:3080",
-      "secure": false
-    }
+  "/book": {
+    "target": "http://localhost:3080",
+    "secure": false
   }
+}

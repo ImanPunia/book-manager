@@ -8,21 +8,21 @@ import { InputComponent } from './form-elements/input/input/input.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { AddBookDialogComponent } from './book-dialog/add-book-dialog/add-book-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { HttpClientModule } from '@angular/common/http';
 import { FileDirectiveDirective } from './directives/file-directive.directive';
-import {MatIconModule} from '@angular/material/icon';
-
-
+import { MatIconModule } from '@angular/material/icon';
+import { UxCardComponent } from './card/ux-card/ux-card.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     InputComponent,
     AddBookDialogComponent,
-    FileDirectiveDirective
+    FileDirectiveDirective,
+    UxCardComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,9 +34,9 @@ import {MatIconModule} from '@angular/material/icon';
     MatFormFieldModule,
     MatButtonModule,
     HttpClientModule,
-    MatIconModule
+    MatIconModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
