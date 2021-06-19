@@ -1,6 +1,5 @@
 .layout{
     display: flex;
-    flex-direction: column;
     min-width: 250px;
     min-height: 300px;
     width: 250px;
@@ -17,21 +16,38 @@
 }
 
 .blurry{
-    filter: blur(28px);
-    width: 250px;
-    background-image: url(/assets/images/dark.jpg);
-    height: 60px;
     position: absolute;
-    bottom: 0px;
-    opacity: 10;
+    top: 0px;
+    left: 0px;
+    border-radius: 0.6rem;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient( 0deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.05) 50%, rgba(0, 0, 0, 0.05) 85%);
 }
 
 .card-body{
     position: relative;
-    overflow: hidden;
 }
 
-.footer{
-    position: relative;
+.text{
+    color: rgb(255, 255, 255);
+    position: absolute;
+    bottom: 7px;
+    width: 100%;
+    left: 5px;
 }
 
+.book-name{
+    font-size: 14px;
+}
+
+.author-name{
+    font-size: 12px;
+    font-style: italic;
+}
+
+.icon{
+    position: absolute;
+    bottom: 0;
+    right: 7px;
+}
