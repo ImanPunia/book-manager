@@ -10,8 +10,9 @@ class bookDao{
                     const errroMsg = 'Unable to insert document';
                     handleSuccessError(errroMsg,undefined,res);
                 } else {
+                    
                     const successMsg = 'Insertion successfull';
-                    handleSuccessError(undefined,successMsg,res);
+                    handleSuccessError(undefined,successMsg,res,value.ops);
                 }
             }));
     }

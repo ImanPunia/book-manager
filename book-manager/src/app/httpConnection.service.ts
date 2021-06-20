@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Book } from './Models/Book';
+import { Observable } from 'rxjs';
+import { bookResponse } from './Models/bookResponse';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +11,7 @@ export class httpConnectionService {
 
   rootUrl = '/book';
 
-  addSingleBook(file: FormData, value: Book) {
-    return this.http.post(this.rootUrl + '/addBook', file);
+  addSingleBook(file: FormData) : Observable<bookResponse>{
+    return this.http.post<bookResponse>(this.rootUrl + '/addBook', file);
   }
 }

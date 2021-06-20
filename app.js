@@ -15,11 +15,11 @@ const imageStorage = multer.diskStorage({
 const appConfig = express(),
     bodyParser = require("body-parser");
     port = 3080;
-    
+    appConfig.use(express.static('images'));
     appConfig.use(express.json());
     appConfig.use(multer({storage:imageStorage}).single('file'));
     appConfig.use('/book',bookRoutes);
 
 const app =  appConfig;
 
-module.exports = app
+module.exports = app;
