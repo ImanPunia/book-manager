@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { httpConnectionService } from './httpConnection.service';
+import { httpConnectionService } from './service/httpConnection.service';
 import { AddBookDialogComponent } from './book-dialog/add-book-dialog/add-book-dialog.component';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { book } from './Models/bookSaved';
@@ -12,12 +12,13 @@ import { book } from './Models/bookSaved';
 })
 export class AppComponent implements OnInit {
   title = 'book-manager';
-  savedBook: book[] = []; 
-  imgSrc : SafeResourceUrl = '';
+  savedBook: book[] = [];
+  imgSrc: SafeResourceUrl = '';
 
   constructor(
     public dialog: MatDialog,
-    readonly connSer: httpConnectionService, private readonly dmSanitizer: DomSanitizer
+    readonly connSer: httpConnectionService,
+    private readonly dmSanitizer: DomSanitizer
   ) {}
   ngOnInit(): void {}
 
@@ -37,12 +38,12 @@ export class AppComponent implements OnInit {
     });
   }
 
-  addSingleBook(formData:FormData){
-    this.connSer.addSingleBook(formData).subscribe((res ) => {
-    this.savedBook = res.book;
-    this.imgSrc = this.dmSanitizer.bypassSecurityTrustResourceUrl( `data:image/jpg;base64,${res.src}`);
+  addSingleBook(formData: FormData) {
+    this.connSer.addSingleBook(formData).subscribe((res) => {
+      this.savedBook = res.book;
+      this.imgSrc = this.dmSanitizer.bypassSecurityTrustResourceUrl(
+        `data:${this.savedBook[0].file.mimetype};base64,${res.src}`
+      );
     });
   }
 }
-
-

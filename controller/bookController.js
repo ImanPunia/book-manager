@@ -8,7 +8,7 @@ function handleSuccessError(err,success,res,book){
     if(err) {
         return res.send(err)
     } else {
-        const _fileName = book[0].file;
+        const _fileName = book[0].file.url;
         return fs.readFile(_fileName,function(err,data){
             if(err){
                 console.log(err);
@@ -31,7 +31,9 @@ function addBooks(req,res){
     const bookData = JSON.parse(req.body.data);
     const imageData = req.file;
     const imageUrl = imageData.path;
-    const book = new Book(bookData.name, bookData.author,bookData.volume,bookData.copies,imageUrl);
+    const imagetype = imageData.mimetype;
+    const file = {url:imageUrl,mimetype: imagetype};
+    const book = new Book(bookData.name, bookData.author,bookData.volume,bookData.copies,file);
     const bookDao = new BookDao(req.app.get('db'));
     bookDao.insertOneBook(book,handleSuccessError,res);
 }
