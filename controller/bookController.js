@@ -1,26 +1,27 @@
 const app = require('../app');
 const BookDao = require('../dataAcessLayer/bookManagerDAO');
 const Book = require('../model/book');
+const BookResponse = require('../model/bookResponse');
 const fs = require('fs'), path = require('path');
 
 
-function handleSuccessError(err,success,res,book){
+function handleSuccessError(err,success,res,books){
     if(err) {
         return res.send(err)
     } else {
-        const _fileName = book[0].file.url;
-        return fs.readFile(_fileName,function(err,data){
-            if(err){
-                console.log(err);
-                res.send(err);
-            } else {
-                res.send({src: data.toString('base64')
-                ,'book':book});
-            }
-        })
-    }
+        return fetchFiles(books,res);
+     }
 }
 
+function fetchFiles(books,res){
+    const bookData = [];
+    books.forEach(book => {
+        const _fileName = book.file.url;
+        const file =  fs.readFileSync(_fileName).toString('base64');
+        bookData.push(new BookResponse(book.name,book.author,book.copies,book.volume,book.file,file));
+   })
+  return res.send({'book':bookData});
+}
 
 /**
  * insert single book in database
@@ -38,4 +39,8 @@ function addBooks(req,res){
     bookDao.insertOneBook(book,handleSuccessError,res);
 }
 
-module.exports = addBooks;
+function fetchBook(req,res){
+    const bookDao = new BookDao(req.app.get('db'));
+    bookDao.fetchBooks(handleSuccessError,res);
+}
+module.exports = {addBooks , fetchBook};

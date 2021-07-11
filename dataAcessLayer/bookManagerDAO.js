@@ -1,3 +1,5 @@
+const { all } = require("../app");
+
 class bookDao{
 
     constructor(client){
@@ -15,6 +17,12 @@ class bookDao{
                     handleSuccessError(undefined,successMsg,res,value.ops);
                 }
             }));
+    }
+
+    async fetchBooks(handleSuccessError,res) {
+        this.client.then(val =>  val.find().toArray().then(val => {
+            handleSuccessError(undefined,undefined,res,val);
+        }))
     }
 }
 

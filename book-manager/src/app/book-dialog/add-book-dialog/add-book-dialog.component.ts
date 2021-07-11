@@ -8,9 +8,9 @@ import { Book } from 'src/app/Models/Book';
   styleUrls: ['./add-book-dialog.component.scss'],
 })
 export class AddBookDialogComponent implements OnInit {
-  public book: Book = new Book('', '', '', '', null);
+  book: Book = new Book('', '', '', '', null);
 
-  fileName = '';
+  fileName: string = '';
 
   constructor(public dialogRef: MatDialogRef<AddBookDialogComponent>) {}
 

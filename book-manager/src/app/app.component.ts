@@ -20,7 +20,9 @@ export class AppComponent implements OnInit {
     readonly connSer: httpConnectionService,
     private readonly dmSanitizer: DomSanitizer
   ) {}
-  ngOnInit(): void {}
+  ngOnInit(): void {debugger;
+    this.displayBooks();
+  }
 
   openDialog(): void {
     const dialogRef = this.dialog.open(AddBookDialogComponent, {
@@ -40,10 +42,16 @@ export class AppComponent implements OnInit {
 
   addSingleBook(formData: FormData) {
     this.connSer.addSingleBook(formData).subscribe((res) => {
-      this.savedBook = res.book;
-      this.imgSrc = this.dmSanitizer.bypassSecurityTrustResourceUrl(
-        `data:${this.savedBook[0].file.mimetype};base64,${res.src}`
-      );
+      this.savedBook = res;
+      // this.imgSrc = this.dmSanitizer.bypassSecurityTrustResourceUrl(
+      //   `data:${this.savedBook[0].file.mimetype};base64,${res.src}`
+      // );
     });
+  }
+
+  displayBooks(){
+    this.connSer.fetchBooks().subscribe((res) =>  {
+      this.savedBook = res;
+    })
   }
 }

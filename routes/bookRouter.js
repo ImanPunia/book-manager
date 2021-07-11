@@ -5,6 +5,7 @@ var router = express.Router();
 const bookContoller  = require('../controller/bookController');
 
 //book routes
-router.post('/addBook',bookContoller);
+router.post('/addBook',bookContoller.addBooks);
+router.get('/fetchBooks', bookContoller.fetchBook);
 
 module.exports = router;
