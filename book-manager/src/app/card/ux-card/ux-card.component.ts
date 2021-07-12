@@ -8,7 +8,6 @@ import { Component, OnInit } from '@angular/core';
 export class UxCardComponent implements OnInit {
   constructor() {}
 
-  value: string = 'djcjdfb';
 
   ngOnInit(): void {}
 }

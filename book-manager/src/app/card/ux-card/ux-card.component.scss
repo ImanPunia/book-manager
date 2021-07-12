@@ -4,6 +4,8 @@
     min-height: 300px;
     width: 250px;
     height: 300px;
+    border: 1px #f3f0f08a solid;
+    border-radius: 5%;
 }
 
 
@@ -15,39 +17,50 @@
     border-radius: 5%;
 }
 
-.blurry{
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    border-radius: 0.6rem;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient( 0deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.05) 50%, rgba(0, 0, 0, 0.05) 85%);
+.card-body{
+   display: flex;
+   flex-direction: column;
+   padding: 0.5rem;
 }
 
-.card-body{
-    position: relative;
+.cover-image{
+    height: 230px;
 }
 
 .text{
-    color: rgb(255, 255, 255);
-    position: absolute;
-    bottom: 7px;
-    width: 100%;
-    left: 5px;
+    padding: 0.6rem 0.5rem 0rem .1rem;
 }
 
 .book-name{
     font-size: 14px;
+    font-weight: 500;
 }
 
 .author-name{
     font-size: 12px;
     font-style: italic;
+    color: rgb(47 39 39 / 58%);
+    padding-right: 0.3rem;
 }
 
-.icon{
-    position: absolute;
-    bottom: 0;
-    right: 7px;
+.copies{
+    padding-right: 0.2rem;
+    padding-left: 0.2rem;
+    font-size: 12px;
+    font-style: italic;
+    color: rgba(47, 39, 39, 0.58);
+    background: rgb(62 60 60 / 10%);
+    border-radius: 33%;
+}
+
+.book-description{
+    display: flex;
+    flex-direction: row;
+}
+
+.volume{
+    font-size: 12px;
+    font-style: italic;
+    color: rgb(47 39 39 / 58%);
+    padding-right: 0.3rem;
 }
