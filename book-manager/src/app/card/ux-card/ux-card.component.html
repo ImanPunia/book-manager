@@ -1,16 +1,16 @@
 <div class="layout">
     <div class="card-body">
         <div class="cover-image">
-            <img class="bg-img" src="/assets/images/pink-flowers.jpg">
+            <img class="bg-img" [src]="imgSrc">
         </div>
          <div> 
              <div class="text">
-                <div class="book-name">The Alchemist</div>
+                <div class="book-name">{{Book.name}}</div>
                 <div class="book-description">
-                    <div class="author-name">Paulo Colheo</div>
-                    <div class = "copies">2</div>
+                    <div class="author-name">{{Book.author}}</div>
+                    <div class = "copies">{{Book.copies}}</div>
                 </div>
-                <div class="volume"> vol. 1</div>
+                <div class="volume"> vol. {{Book.volume}}</div>
              </div>
         </div>
     </div>

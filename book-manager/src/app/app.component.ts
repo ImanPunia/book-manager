@@ -20,7 +20,8 @@ export class AppComponent implements OnInit {
     readonly connSer: httpConnectionService,
     private readonly dmSanitizer: DomSanitizer
   ) {}
-  ngOnInit(): void {debugger;
+  
+  ngOnInit(): void {
     this.displayBooks();
   }
 

@@ -20,7 +20,7 @@ function fetchFiles(books,res){
         const file =  fs.readFileSync(_fileName).toString('base64');
         bookData.push(new BookResponse(book.name,book.author,book.copies,book.volume,book.file,file));
    })
-  return res.send({'book':bookData});
+  return res.send(bookData);
 }
 
 /**

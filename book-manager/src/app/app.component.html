@@ -1,10 +1,14 @@
 <button mat-button (click)="openDialog()">Add Book</button>
 
-<ng-container *ngFor = "let book of savedBook">
-    <app-ux-card></app-ux-card>
-</ng-container>
+<div class="card-container">
+    <ng-container *ngFor = "let book of savedBook">
+        <div class="outer">
+            <app-ux-card [book]="book"></app-ux-card>
+        </div>
+    </ng-container>
+</div>
 
-    <div>
-       <img [src]="imgSrc" > 
-    </div>
+
+
+
 
