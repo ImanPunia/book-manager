@@ -1,8 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { book } from 'src/app/Models/bookSaved';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { httpConnectionService } from 'src/app/service/httpConnection.service';
-
 
 @Component({
   selector: 'app-ux-card',
@@ -12,10 +10,11 @@ import { httpConnectionService } from 'src/app/service/httpConnection.service';
 export class UxCardComponent implements OnInit {
   @Input('book')
   Book!: book;
+  @Output() deleted = new EventEmitter<String>();
+
   imgSrc: SafeResourceUrl = '';
 
-  constructor( private readonly dmSanitizer: DomSanitizer,
-    readonly connSer: httpConnectionService) {}
+  constructor( private readonly dmSanitizer: DomSanitizer) {}
 
   ngOnInit(): void {
       this.imgSrc = this.dmSanitizer.bypassSecurityTrustResourceUrl(
@@ -24,8 +23,7 @@ export class UxCardComponent implements OnInit {
   }
 
   delete(){
-    this.connSer.deleteBook(this.Book.id).subscribe(res => console.log(res.count));
+    this.deleted.emit(this.Book.id);
   }
-
 
 }

@@ -45,4 +45,11 @@ export class AppComponent implements OnInit {
   displayBooks(){
     this.connSer.fetchBooks().subscribe((res) => this.savedBook  = res)
   }
+
+  deleteBook(id: String){
+    this.connSer.deleteBook(id).subscribe(res => {
+      const removedBook  = this.savedBook.filter(array => array.id === id);
+      this.savedBook.splice(this.savedBook.indexOf(removedBook[0]),1);
+    });
+  }
 }
