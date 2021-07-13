@@ -3,7 +3,6 @@ const BookDao = require('../dataAcessLayer/bookManagerDAO');
 const Book = require('../model/book');
 const BookResponse = require('../model/bookResponse');
 const fs = require('fs'), path = require('path');
-const bookDao = require('../dataAcessLayer/bookManagerDAO');
 
 
 function handleSuccessError(err,success,res,books,id){

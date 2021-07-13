@@ -8,9 +8,10 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
   styleUrls: ['./ux-card.component.scss'],
 })
 export class UxCardComponent implements OnInit {
-  @Input('book')
-  Book!: book;
+  @Input('book') Book!: book;
+
   @Output() deleted = new EventEmitter<String>();
+  @Output() edit  = new EventEmitter<book>();
 
   imgSrc: SafeResourceUrl = '';
 
@@ -22,8 +23,11 @@ export class UxCardComponent implements OnInit {
        );
   }
 
-  delete(){
+  deleteBook(){
     this.deleted.emit(this.Book.id);
   }
 
+  editBook(){
+    this.edit.emit(this.Book);
+  }
 }

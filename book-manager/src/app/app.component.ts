@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { httpConnectionService } from './service/httpConnection.service';
 import { AddBookDialogComponent } from './book-dialog/add-book-dialog/add-book-dialog.component';
 import { book } from './Models/bookSaved';
@@ -50,6 +50,27 @@ export class AppComponent implements OnInit {
     this.connSer.deleteBook(id).subscribe(res => {
       const removedBook  = this.savedBook.filter(array => array.id === id);
       this.savedBook.splice(this.savedBook.indexOf(removedBook[0]),1);
+    });
+  }
+
+  updateRecord(book: book){
+
+    const config = new MatDialogConfig();
+
+    config.width  = '500px';
+    config.data = book;
+
+
+    const dialogRef = this.dialog.open(AddBookDialogComponent, config);
+
+    dialogRef.afterClosed().subscribe((value) => {
+      if (value != undefined) {
+        // console.log(JSON.stringify(value));
+        // let formData = new FormData();
+        // formData.append('file', value.file);
+        // formData.append('data', JSON.stringify(value));
+        // this.addSingleBook(formData);
+      }
     });
   }
 }

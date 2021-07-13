@@ -3,7 +3,7 @@
 <div class="card-container">
     <ng-container *ngFor = "let book of savedBook">
         <div class="outer">
-            <app-ux-card [book]="book" (deleted)="deleteBook($event)"></app-ux-card>
+            <app-ux-card [book]="book" (deleted)="deleteBook($event)" (edit)="updateRecord($event)"></app-ux-card>
         </div>
     </ng-container>
 </div>
