@@ -1,4 +1,5 @@
 export interface book {
+  id: String;
   name: String;
   author: String;
   volume: String;

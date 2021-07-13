@@ -11,7 +11,12 @@
                     <div class = "copies">{{Book.copies}}</div>
                 </div>
                 <div class="volume"> vol. {{Book.volume}}</div>
-             </div>
+                <div class="icon-container">
+                    <div mat-mini-fab class="icon">
+                        <mat-icon class="font_20">edit</mat-icon>
+                        <mat-icon class="font_20" (click) = "delete()">delete</mat-icon>
+                    </div>
+               </div>
         </div>
     </div>
 </div>

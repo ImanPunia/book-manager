@@ -3,22 +3,29 @@ const BookDao = require('../dataAcessLayer/bookManagerDAO');
 const Book = require('../model/book');
 const BookResponse = require('../model/bookResponse');
 const fs = require('fs'), path = require('path');
+const bookDao = require('../dataAcessLayer/bookManagerDAO');
 
 
-function handleSuccessError(err,success,res,books){
+function handleSuccessError(err,success,res,books,id){
     if(err) {
         return res.send(err)
     } else {
-        return fetchFiles(books,res);
+        return fetchFiles(books,res,id);
      }
 }
 
-function fetchFiles(books,res){
+function fetchFiles(books,res,id){
     const bookData = [];
     books.forEach(book => {
+        let objId;
         const _fileName = book.file.url;
         const file =  fs.readFileSync(_fileName).toString('base64');
-        bookData.push(new BookResponse(book.name,book.author,book.copies,book.volume,book.file,file));
+        if(id){
+         objId = id.toString();
+        } else {
+            objId = book._id.toString();
+        }
+        bookData.push(new BookResponse(objId,book.name,book.author,book.copies,book.volume,book.file,file));
    })
   return res.send(bookData);
 }
@@ -43,4 +50,10 @@ function fetchBook(req,res){
     const bookDao = new BookDao(req.app.get('db'));
     bookDao.fetchBooks(handleSuccessError,res);
 }
-module.exports = {addBooks , fetchBook};
+
+function deleteBook(req,res){
+    const bookId = req.params.id;
+    const bookDao = new BookDao(req.app.get('db'));
+    bookDao.deleteBook(bookId,res);
+}
+module.exports = {addBooks , fetchBook, deleteBook};

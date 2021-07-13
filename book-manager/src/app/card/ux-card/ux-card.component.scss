@@ -29,6 +29,7 @@
 
 .text{
     padding: 0.6rem 0.5rem 0rem .1rem;
+    position: relative;
 }
 
 .book-name{
@@ -63,4 +64,18 @@
     font-style: italic;
     color: rgb(47 39 39 / 58%);
     padding-right: 0.3rem;
+}
+
+.icon-container{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
+.icon{
+    color: rgb(47 39 39 / 58%);
+}
+
+.font_20{
+    font-size: 20px;
 }

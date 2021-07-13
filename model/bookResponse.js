@@ -1,6 +1,7 @@
 class bookResponse{
 
-    constructor(name,author,volume,copies,file,src){
+    constructor(id,name,author,volume,copies,file,src){
+        this.id = id
         this.name = name;
         this.author = author;
         this.copies = copies;
