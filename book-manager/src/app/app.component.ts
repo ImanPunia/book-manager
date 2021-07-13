@@ -1,22 +1,36 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { httpConnectionService } from './service/httpConnection.service';
 import { AddBookDialogComponent } from './book-dialog/add-book-dialog/add-book-dialog.component';
 import { book } from './Models/bookSaved';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
   title = 'book-manager';
   savedBook!: book[];
+
+  openDialogSubscription!: Subscription;
+  updateDialogSubscription!: Subscription;
 
   constructor(
     public dialog: MatDialog,
     readonly connSer: httpConnectionService
   ) {}
+
+  ngOnDestroy(): void {
+    if(this.openDialogSubscription) {
+      this.openDialogSubscription.unsubscribe();
+    }
+
+    if(this.updateDialogSubscription) {
+      this.updateDialogSubscription.unsubscribe();
+    }
+  }
 
   ngOnInit(): void {
     this.displayBooks();
@@ -27,7 +41,7 @@ export class AppComponent implements OnInit {
       width: '500px',
     });
 
-    dialogRef.afterClosed().subscribe((value) => {
+    this.openDialogSubscription = dialogRef.afterClosed().subscribe((value) => {
       if (value != undefined) {
         console.log(JSON.stringify(value));
         let formData = new FormData();
@@ -63,13 +77,9 @@ export class AppComponent implements OnInit {
 
     const dialogRef = this.dialog.open(AddBookDialogComponent, config);
 
-    dialogRef.afterClosed().subscribe((value) => {
+    this.updateDialogSubscription = dialogRef.afterClosed().subscribe((value) => {
       if (value != undefined) {
-        // console.log(JSON.stringify(value));
-        // let formData = new FormData();
-        // formData.append('file', value.file);
-        // formData.append('data', JSON.stringify(value));
-        // this.addSingleBook(formData);
+         console.log(JSON.stringify(value));
       }
     });
   }

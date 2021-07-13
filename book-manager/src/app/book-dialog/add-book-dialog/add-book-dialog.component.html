@@ -53,5 +53,12 @@
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
-  <button mat-button class="color-purple" (click)="addBook()">ADD</button>
+  <ng-container *ngIf = "isUpdate;else addBookBttn">
+    <button mat-button class="color-purple" (click)="updateBook()">Update</button>
+  </ng-container>
 </mat-dialog-actions>
+
+<ng-template #addBookBttn>
+      <button mat-button class="color-purple"  (click)="addBook()">Add</button>
+</ng-template>
+
