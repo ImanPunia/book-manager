@@ -16,7 +16,6 @@ export class AppComponent implements OnInit, OnDestroy {
 
   openDialogSubscription!: Subscription;
   updateDialogSubscription!: Subscription;
-  updateDialogSubscription!: Subscription;
 
   constructor(
     public dialog: MatDialog,
@@ -26,10 +25,6 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     if(this.openDialogSubscription) {
       this.openDialogSubscription.unsubscribe();
-    }
-
-    if(this.updateDialogSubscription) {
-      this.updateDialogSubscription.unsubscribe();
     }
 
     if(this.updateDialogSubscription){
