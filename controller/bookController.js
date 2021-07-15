@@ -14,6 +14,7 @@ function handleSuccessError(err,success,res,books,id){
 }
 
 function fetchFiles(books,res,id){
+    console.log(id);
     const bookData = [];
     books.forEach(book => {
         let objId;
@@ -55,4 +56,22 @@ function deleteBook(req,res){
     const bookDao = new BookDao(req.app.get('db'));
     bookDao.deleteBook(bookId,res);
 }
-module.exports = {addBooks , fetchBook, deleteBook};
+
+function updateBook(req,res) {
+    const bookData = JSON.parse(req.body.data);
+    const imageData = req.file;
+    let file ;
+    if(imageData){
+        const imageUrl = imageData.path;
+        const imagetype = imageData.mimetype;
+         file = {url:imageUrl,mimetype: imagetype};
+         bookData.file = file;
+    } else{
+        file = bookData.file;
+    }
+    
+    const bookDao = new BookDao(req.app.get('db'));
+    bookDao.updateSinglebook(bookData,handleSuccessError,res);
+
+}
+module.exports = {addBooks , fetchBook, deleteBook ,updateBook};

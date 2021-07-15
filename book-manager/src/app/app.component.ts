@@ -16,6 +16,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   openDialogSubscription!: Subscription;
   updateDialogSubscription!: Subscription;
+  updateDialogSubscription!: Subscription;
 
   constructor(
     public dialog: MatDialog,
@@ -28,6 +29,10 @@ export class AppComponent implements OnInit, OnDestroy {
     }
 
     if(this.updateDialogSubscription) {
+      this.updateDialogSubscription.unsubscribe();
+    }
+
+    if(this.updateDialogSubscription){
       this.updateDialogSubscription.unsubscribe();
     }
   }
@@ -62,7 +67,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   deleteBook(id: String){
     this.connSer.deleteBook(id).subscribe(res => {
-      const removedBook  = this.savedBook.filter(array => array.id === id);
+      const removedBook  = this.savedBook.filter(array => array._id === id);
       this.savedBook.splice(this.savedBook.indexOf(removedBook[0]),1);
     });
   }
@@ -70,17 +75,26 @@ export class AppComponent implements OnInit, OnDestroy {
   updateRecord(book: book){
 
     const config = new MatDialogConfig();
-
     config.width  = '500px';
     config.data = book;
-
-
     const dialogRef = this.dialog.open(AddBookDialogComponent, config);
 
-    this.updateDialogSubscription = dialogRef.afterClosed().subscribe((value) => {
+    this.updateDialogSubscription = this.updateDialogSubscription = dialogRef.afterClosed().subscribe((value) => {
       if (value != undefined) {
-         console.log(JSON.stringify(value));
+        console.log(JSON.stringify(value));
+        let formData = new FormData();
+        formData.append('file', value.uploadedFile);
+        formData.append('data', JSON.stringify(value));
+        this.updateSingleBook(formData);
       }
+    });
+  }
+
+  updateSingleBook(formData: FormData) {
+    this.connSer.updateBook(formData).subscribe((res) => { 
+      const updatedBook  = this.savedBook.filter(array => array._id === res[0]._id);
+      const index = this.savedBook.indexOf(updatedBook[0]);
+      this.savedBook.splice(index,1,res[0]);
     });
   }
 }

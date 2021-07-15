@@ -23,4 +23,8 @@ export class httpConnectionService {
   deleteBook(id:String):Observable<deletedBook>{
     return this.http.delete<deletedBook>(this.rootUrl + '/deleteBook/' + id);
   }
+
+  updateBook(data: FormData): Observable<book[]>{
+    return this.http.put<book[]>(this.rootUrl + '/updateBook',  data);
+  }
 }

@@ -1,11 +1,12 @@
 const { ObjectId } = require("mongodb");
-const { all } = require("../app");
+const Book = require('../model/book');
+
 class bookDao{
 
     constructor(client){
         this.client = client;
     }
-
+    
     async insertOneBook(book,handleSuccessError,res){
         this.client.then(val => val.insertOne(book, (err,value) => {
                 if(err) {
@@ -36,6 +37,30 @@ class bookDao{
            });
         });
     }
+
+    async updateSinglebook(bookData,handleSuccessError,res){
+        const book = new Book(bookData.name, bookData.author,bookData.copies,bookData.volume,bookData.file);
+        
+        const filter   =  { '_id' : ObjectId(bookData._id)};
+        const options = { "upsert": false };
+        let updateDoc = {
+            $set: book,
+        };
+      
+            this.client.then(val => val.updateOne(filter, updateDoc,options, function(err, value) {
+             if(err) {
+                const errroMsg = 'Unable to insert document';
+                handleSuccessError(errroMsg,undefined,res);
+            } else {
+                const successMsg = 'Updation successfull';
+                const updatedBook = [];
+                updatedBook.push(bookData);
+                handleSuccessError(undefined,successMsg,res,updatedBook);
+            }
+            }));
+
+      }
+
 }
 
 module.exports = bookDao;

@@ -24,7 +24,7 @@ export class UxCardComponent implements OnInit {
   }
 
   deleteBook(){
-    this.deleted.emit(this.Book.id);
+    this.deleted.emit(this.Book._id);
   }
 
   editBook(){

@@ -8,5 +8,6 @@ const bookContoller  = require('../controller/bookController');
 router.post('/addBook',bookContoller.addBooks);
 router.get('/fetchBooks', bookContoller.fetchBook);
 router.delete('/deleteBook/:id' , bookContoller.deleteBook);
+router.put('/updateBook' , bookContoller.updateBook);
 
 module.exports = router;

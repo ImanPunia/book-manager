@@ -1,6 +1,6 @@
 class book{
 
-    constructor(name,author,volume,copies,file){
+    constructor(name,author,copies,volume,file){
         this.name = name;
         this.author = author;
         this.copies = copies;

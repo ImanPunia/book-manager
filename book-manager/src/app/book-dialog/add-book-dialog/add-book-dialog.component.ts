@@ -2,7 +2,7 @@ import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Book } from 'src/app/Models/Book';
-import { book } from 'src/app/Models/bookSaved';
+import { book, updateBook } from 'src/app/Models/bookSaved';
 
 @Component({
   selector: 'app-add-book-dialog',
@@ -16,6 +16,7 @@ export class AddBookDialogComponent implements OnInit {
 
   isUpdate: boolean = false;
   book: Book = new Book('', '', '', '', null);
+  editBook!:  book;
 
   fileName: string = '';
 
@@ -23,8 +24,9 @@ export class AddBookDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) data: book) {
       
       if(data) {
+        this.editBook = data;
         this.isUpdate = true;
-        this.book = new Book(data.name, data.author,  data.volume,  data.copies, null);
+        this.book = new Book(data.name, data.author,  data.copies,  data.volume, null);
         const index = data.file.url.indexOf('-');
         this.fileName = data.file.url.substring(index + 1);
       }
@@ -37,23 +39,18 @@ export class AddBookDialogComponent implements OnInit {
   }
 
   addBook() {
-    console.log(this.book);
     this.dialogRef.close(this.book);
   }
 
   updateBook(){
-    const bookData = this.getChangedValues();
-    this.dialogRef.close(bookData);
+    this.dialogRef.close(this.prepareUpdateObj());
   }
 
-  getChangedValues(){
-    const book: any = {} ;
-    Object.keys(this.bookForm.controls).forEach(name => {
-        if(this.bookForm.controls[name].dirty){
-          book[name] = this.bookForm.controls[name].value;
-        }
-    });
-    return book;
+  prepareUpdateObj(){
+    const updatedBook = new updateBook(this.editBook._id, this.book.name, this.book.author, this.book.copies,
+                                      this.book.volume, this.book.file, this.editBook.file );
+    return updatedBook;
   }
+
 
 }

@@ -1,9 +1,9 @@
 export interface book {
-  id: String;
+  _id: String;
   name: String;
   author: String;
-  volume: String;
   copies: String;
+  volume: String;
   file: file;
   src:  String;
 }
@@ -11,4 +11,16 @@ export interface book {
 export interface file {
   url: string;
   mimetype: string;
+}
+
+export class updateBook{
+  constructor(
+    public _id: String,
+    public name: String,
+    public author: String,
+    public copies: String,
+    public volume: String,
+    public uploadedFile: File | null,
+    public file: file
+  ) {}
 }
