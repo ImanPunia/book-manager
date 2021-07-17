@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { book } from '../Models/bookSaved';
 import { bookResponse } from '../Models/bookResponse';
 
 @Injectable({
@@ -21,7 +20,7 @@ export class httpConnectionService {
   }
 
   deleteBook(id:String):Observable<bookResponse>{
-    return this.http.delete<bookResponse>(this.rootUrl + '/deleteBook/' + id);
+    return this.http.delete<bookResponse>(this.rootUrl + `/deleteBook/${id}`);
   }
 
   updateBook(data: FormData): Observable<bookResponse>{

@@ -48,10 +48,10 @@ export class AddBookDialogComponent implements OnInit {
 
   prepareUpdateObj(){
     let updatedBook;
-
+    
     if(this.bookForm.dirty) {
-      updatedBook = new updateBook(this.editBook._id, this.book.name, this.book.author, this.book.copies,
-                                    this.book.volume, this.book.file, this.editBook.file );
+      const {name,author,copies,volume,file} =  this.book;
+      updatedBook = new updateBook(this.editBook._id, name,author,copies,volume, file, this.editBook.file );
     }
     return updatedBook;
   }

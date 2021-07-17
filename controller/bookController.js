@@ -10,18 +10,19 @@ function handleSuccess(res,count,books,id){
 }
 
 function fetchFiles(books,res,count,id){
-    console.log(id);
     const bookData = [];
     books.forEach(book => {
         let objId;
         const _fileName = book.file.url;
-        const file =  fs.readFileSync(_fileName).toString('base64');
+        const fileData =  fs.readFileSync(_fileName).toString('base64');
+
         if(id){
-         objId = id.toString();
+            objId = id.toString();
         } else {
             objId = book._id.toString();
         }
-        bookData.push(new BookResponse(objId,book.name,book.author,book.copies,book.volume,book.file,file));
+        const {name,author,copies,volume,file} = book;
+        bookData.push(new BookResponse(objId,name,author,copies,volume,file,fileData));
    })
   return res.status(200).send({'books': bookData, 'count': count});
 }
@@ -34,40 +35,52 @@ function fetchFiles(books,res,count,id){
 function addBooks(req,res){
     const bookData = JSON.parse(req.body.data);
     const imageData = req.file;
-    const imageUrl = imageData.path;
-    const imagetype = imageData.mimetype;
-    const file = {url:imageUrl,mimetype: imagetype};
+    const file = {url:imageData.path,mimetype: imageData.mimetype};
     const book = new Book(bookData.name, bookData.author,bookData.volume,bookData.copies,file);
     const bookDao = new BookDao(req.app.get('db'));
     bookDao.insertOneBook(book,handleSuccess,res);
 }
 
+/**
+ * fetch all saved books
+ * @param {*} req 
+ * @param {*} res 
+ */
 function fetchBook(req,res){
     const bookDao = new BookDao(req.app.get('db'));
     bookDao.fetchBooks(handleSuccess,res);
 }
 
+/**
+ *  delete the book
+ * @param {*} req 
+ * @param {*} res 
+ */
 function deleteBook(req,res){
     const bookId = req.params.id;
     const bookDao = new BookDao(req.app.get('db'));
     bookDao.deleteBook(bookId,res);
 }
 
+/**
+ *  update the book data
+ * @param {*} req 
+ * @param {*} res 
+ */
 function updateBook(req,res) {
     const bookData = JSON.parse(req.body.data);
     const imageData = req.file;
     let file ;
+    
     if(imageData){
-        const imageUrl = imageData.path;
-        const imagetype = imageData.mimetype;
-         file = {url:imageUrl,mimetype: imagetype};
-         bookData.file = file;
+        file = {url:imageData.path,mimetype: imageData.mimetype};
+        bookData.file = file;
     } else{
         file = bookData.file;
     }
     
     const bookDao = new BookDao(req.app.get('db'));
     bookDao.updateSinglebook(bookData,handleSuccess,res);
-
 }
+
 module.exports = {addBooks , fetchBook, deleteBook ,updateBook};
