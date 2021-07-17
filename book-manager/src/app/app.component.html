@@ -3,11 +3,17 @@
 <button mat-button (click)="openDialog()">Add Book</button>
 <div class="p-relative">
     <app-notifier *ngIf="success">
-        <div class='p-absolute  success-color'> saved successfully</div>
+        <div class   = "notify success-color">
+            <mat-icon>check_circle_outline</mat-icon>
+            <div class='p_l_03'>saved</div>
+        </div>
     </app-notifier>
     
     <app-notifier *ngIf="failure">
-        <div class='p-absolute failure-color'> Error while saving last entry </div>
+        <div class="notify failure-color">	
+           <mat-icon>error_outline</mat-icon>
+           <div class="p_l_03">Error while saving last entry</div>
+        </div>
     </app-notifier>
 </div>
 

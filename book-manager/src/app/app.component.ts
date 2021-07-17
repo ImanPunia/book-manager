@@ -14,7 +14,7 @@ export class AppComponent implements OnInit, OnDestroy {
   title = 'book-manager';
   savedBook!: book[];
   success = false;
-  failure = false;
+  failure = false; 
 
   openDialogSubscription!: Subscription;
   updateDialogSubscription!: Subscription;
@@ -94,7 +94,6 @@ export class AppComponent implements OnInit, OnDestroy {
 
     this.updateDialogSubscription = this.updateDialogSubscription = dialogRef.afterClosed().subscribe((value) => {
       if (value != undefined) {
-        console.log(JSON.stringify(value));
         let formData = new FormData();
         formData.append('file', value.uploadedFile);
         formData.append('data', JSON.stringify(value));
