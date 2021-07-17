@@ -16,8 +16,12 @@ export class AppComponent implements OnInit, OnDestroy {
   success = false;
   failure = false; 
 
-  openDialogSubscription!: Subscription;
-  updateDialogSubscription!: Subscription;
+  openDialogSubscription: Subscription =  Subscription.EMPTY;
+  updateDialogSubscription: Subscription = Subscription.EMPTY;
+
+  editBookSubscription: Subscription = Subscription.EMPTY;
+  deleteBookSubscription:  Subscription = Subscription.EMPTY;
+  addBookSubscription: Subscription  = Subscription.EMPTY;
 
   constructor(
     public dialog: MatDialog,
@@ -25,13 +29,11 @@ export class AppComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnDestroy(): void {
-    if(this.openDialogSubscription) {
-      this.openDialogSubscription.unsubscribe();
-    }
-
-    if(this.updateDialogSubscription){
-      this.updateDialogSubscription.unsubscribe();
-    }
+    this.unsubscribeSubscription(this.editBookSubscription);
+    this.unsubscribeSubscription(this.deleteBookSubscription);
+    this.unsubscribeSubscription(this.addBookSubscription);
+    this.unsubscribeSubscription(this.openDialogSubscription);
+    this.unsubscribeSubscription(this.updateDialogSubscription);
   }
 
   ngOnInit(): void {
@@ -55,26 +57,24 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   addSingleBook(formData: FormData) {
-    this.connSer.addSingleBook(formData).subscribe((res) => {
+    this.connSer.addSingleBook(formData).subscribe(res => {
     this.savedBook.push(res.books[0])
     this.displayNotification(res.count); 
+    }, 
+    err => {
+      this.failure= true
+      this.success = false;
     });
   }
 
-  displayNotification(count:string){
-    if(count){
-      this.failure = false;
-      this.success = true;
-    } else {
-      this.success = false;
-      this.failure = true;
-    }
-  }
-
   displayBooks(){
-    this.connSer.fetchBooks().subscribe((res) => 
+    this.connSer.fetchBooks().subscribe(res => 
     {
       this.savedBook  = res.books;
+    },
+    err => {
+      this.failure = true;
+      this.success = false;
     })
   }
 
@@ -83,6 +83,10 @@ export class AppComponent implements OnInit, OnDestroy {
       const removedBook  = this.savedBook.filter(array => array._id === id);
       this.savedBook.splice(this.savedBook.indexOf(removedBook[0]),1);
       this.displayNotification(res.count); 
+    },
+    err => {
+      this.failure = true;
+      this.success = false;
     });
   }
 
@@ -103,11 +107,28 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   updateSingleBook(formData: FormData) {
-    this.connSer.updateBook(formData).subscribe((res) => { 
+    this.connSer.updateBook(formData).subscribe(res => { 
       const updatedBook  = this.savedBook.filter(array => array._id === res.books[0]._id);
       const index = this.savedBook.indexOf(updatedBook[0]);
       this.savedBook.splice(index,1,res.books[0]);
       this.displayNotification(res.count); 
+    },
+    err => {
+      this.failure = true;
+      this.success = false;
     });
+  }
+
+  unsubscribeSubscription(subscription:Subscription){
+    if(subscription){
+      subscription.unsubscribe();
+    }
+  }
+
+  displayNotification(count:string){
+    if(count){
+      this.failure = false;
+      this.success = true;
+    } 
   }
 }
