@@ -5,12 +5,8 @@ const BookResponse = require('../model/bookResponse');
 const fs = require('fs'), path = require('path');
 
 
-function handleSuccessError(err,res,count,books,id){
-    if(err) {
-        return res.send({'test':err,  'count' : count})
-    } else {
+function handleSuccess(res,count,books,id){
         return fetchFiles(books,res,count,id);
-     }
 }
 
 function fetchFiles(books,res,count,id){
@@ -27,7 +23,7 @@ function fetchFiles(books,res,count,id){
         }
         bookData.push(new BookResponse(objId,book.name,book.author,book.copies,book.volume,book.file,file));
    })
-  return res.send({'books': bookData, 'count': count});
+  return res.status(200).send({'books': bookData, 'count': count});
 }
 
 /**
@@ -43,12 +39,12 @@ function addBooks(req,res){
     const file = {url:imageUrl,mimetype: imagetype};
     const book = new Book(bookData.name, bookData.author,bookData.volume,bookData.copies,file);
     const bookDao = new BookDao(req.app.get('db'));
-    bookDao.insertOneBook(book,handleSuccessError,res);
+    bookDao.insertOneBook(book,handleSuccess,res);
 }
 
 function fetchBook(req,res){
     const bookDao = new BookDao(req.app.get('db'));
-    bookDao.fetchBooks(handleSuccessError,res);
+    bookDao.fetchBooks(handleSuccess,res);
 }
 
 function deleteBook(req,res){
@@ -71,7 +67,7 @@ function updateBook(req,res) {
     }
     
     const bookDao = new BookDao(req.app.get('db'));
-    bookDao.updateSinglebook(bookData,handleSuccessError,res);
+    bookDao.updateSinglebook(bookData,handleSuccess,res);
 
 }
 module.exports = {addBooks , fetchBook, deleteBook ,updateBook};

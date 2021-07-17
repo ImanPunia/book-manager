@@ -7,37 +7,61 @@ class bookDao{
         this.client = client;
     }
     
-    async insertOneBook(book,handleSuccessError,res){
-        this.client.then(val => val.insertOne(book, (err,value) => {
+    async insertOneBook(book,handleSuccess,res){
+        try{
+            this.client.then((val) => val.insertOne(book, (err,value) => {
                 if(err) {
-                    const errroMsg = 'Unable to insert document';
-                    handleSuccessError(errroMsg,res,insertedCount);
+                    return res.status(500).send({'text':'Unable to insert document'})
                 } else {
-                    handleSuccessError(undefined,res,value.insertedCount,value.ops,value.insertedId);
+                    handleSuccess(res,value.insertedCount,value.ops,value.insertedId);
                 }
-            }));
+            }),
+            _err => {
+                res.status(500).send({'text':'unable to get connection'})
+            });
+        } catch(e){
+            res.send(500).send({'text':'Unable to save document'});
+        }
+      
     }
 
-    async fetchBooks(handleSuccessError,res) {
-        this.client.then(val =>  val.find().toArray().then(val => {
-            handleSuccessError(undefined,res,val.length,val);
-        }))
+    async fetchBooks(handleSuccess,res) {
+        try{
+            this.client.then(val =>  {
+                        val.find().toArray().then(val => {
+                            handleSuccess(res,val.length,val);
+                        }, err => {
+                            return res.status(404).send({'text':'Unable to fetch data'})
+                        }) 
+            })
+        } catch(e) {
+            return res.status(500).send({'text':"unable to fetch"});
+        }
+            
     }
 
     async deleteBook(id,res){
-        this.client.then(val => {
-           val.deleteOne({_id:ObjectId(id)},(err,value) => {
-               const count = value.deletedCount;
-            if(err) {
-                return res.status(404).send({'text':'Unable to delete document','count': count});
-            } else {
-                return res.status(200).send({'text':'deletion successful','count':count});
-            }
-           });
-        });
+        try{
+            this.client.then(val => {
+                    val.deleteOne({_id:ObjectId(id)},(err,value) => {
+                        const count = value.deletedCount;
+                     if(err) {
+                         return res.status(404).send({'text':'Unable to delete document'});
+                     } else {
+                         return res.status(200).send({'text':'deletion successful','count':count});
+                     }
+                    });
+             },
+             _err => {
+                 res.status(500).send({'text':'unable to get connection'})
+             });
+        } catch(e){
+            return res.status(500).send({'text':'Unable to delete entry'})
+        }
+        
     }
 
-    async updateSinglebook(bookData,handleSuccessError,res){
+    async updateSinglebook(bookData,handleSuccess,res){
         const book = new Book(bookData.name, bookData.author,bookData.copies,bookData.volume,bookData.file);
         
         const filter   =  { '_id' : ObjectId(bookData._id)};
@@ -46,16 +70,23 @@ class bookDao{
             $set: book,
         };
       
+        try{
             this.client.then(val => val.updateOne(filter, updateDoc,options, function(err, value) {
-             if(err) {
-                const errroMsg = 'Unable to insert document';
-                handleSuccessError(errroMsg,res,updatedCount);
-            } else {
-                const updatedBook = [];
-                updatedBook.push(bookData);
-                handleSuccessError(undefined,res,value.modifiedCount,updatedBook);
-            }
-            }));
+                if(err) {
+                    return res.status(500).send({'text':'Unable to update document'});
+               } else {
+                   const updatedBook = [];
+                   updatedBook.push(bookData);
+                   handleSuccess(res,value.modifiedCount,updatedBook);
+               }
+               }),
+               _err => {
+                   res.status(500).send({'text':'unable to get connection'})
+               });
+        } catch(e)  {
+            return res.status(500).send({'text':'Unable to update document'});
+        }
+            
 
       }
 
