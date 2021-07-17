@@ -5,15 +5,15 @@ const BookResponse = require('../model/bookResponse');
 const fs = require('fs'), path = require('path');
 
 
-function handleSuccessError(err,success,res,books,id){
+function handleSuccessError(err,res,count,books,id){
     if(err) {
-        return res.send(err)
+        return res.send({'test':err,  'count' : count})
     } else {
-        return fetchFiles(books,res,id);
+        return fetchFiles(books,res,count,id);
      }
 }
 
-function fetchFiles(books,res,id){
+function fetchFiles(books,res,count,id){
     console.log(id);
     const bookData = [];
     books.forEach(book => {
@@ -27,7 +27,7 @@ function fetchFiles(books,res,id){
         }
         bookData.push(new BookResponse(objId,book.name,book.author,book.copies,book.volume,book.file,file));
    })
-  return res.send(bookData);
+  return res.send({'books': bookData, 'count': count});
 }
 
 /**

@@ -11,17 +11,16 @@ class bookDao{
         this.client.then(val => val.insertOne(book, (err,value) => {
                 if(err) {
                     const errroMsg = 'Unable to insert document';
-                    handleSuccessError(errroMsg,undefined,res);
+                    handleSuccessError(errroMsg,res,insertedCount);
                 } else {
-                    const successMsg = 'Insertion successfull';
-                    handleSuccessError(undefined,successMsg,res,value.ops,value.insertedId);
+                    handleSuccessError(undefined,res,value.insertedCount,value.ops,value.insertedId);
                 }
             }));
     }
 
     async fetchBooks(handleSuccessError,res) {
         this.client.then(val =>  val.find().toArray().then(val => {
-            handleSuccessError(undefined,undefined,res,val);
+            handleSuccessError(undefined,res,val.length,val);
         }))
     }
 
@@ -50,12 +49,11 @@ class bookDao{
             this.client.then(val => val.updateOne(filter, updateDoc,options, function(err, value) {
              if(err) {
                 const errroMsg = 'Unable to insert document';
-                handleSuccessError(errroMsg,undefined,res);
+                handleSuccessError(errroMsg,res,updatedCount);
             } else {
-                const successMsg = 'Updation successfull';
                 const updatedBook = [];
                 updatedBook.push(bookData);
-                handleSuccessError(undefined,successMsg,res,updatedBook);
+                handleSuccessError(undefined,res,value.modifiedCount,updatedBook);
             }
             }));
 

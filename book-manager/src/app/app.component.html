@@ -1,4 +1,16 @@
+
+
 <button mat-button (click)="openDialog()">Add Book</button>
+<div class="p-relative">
+    <app-notifier *ngIf="success">
+        <div class='p-absolute  success-color'> saved successfully</div>
+    </app-notifier>
+    
+    <app-notifier *ngIf="failure">
+        <div class='p-absolute failure-color'> Error while saving last entry </div>
+    </app-notifier>
+</div>
+
 
 <div class="card-container">
     <ng-container *ngFor = "let book of savedBook">
@@ -7,8 +19,5 @@
         </div>
     </ng-container>
 </div>
-
-
-
 
 

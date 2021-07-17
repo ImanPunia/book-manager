@@ -13,6 +13,8 @@ import { Subscription } from 'rxjs';
 export class AppComponent implements OnInit, OnDestroy {
   title = 'book-manager';
   savedBook!: book[];
+  success = false;
+  failure = false;
 
   openDialogSubscription!: Subscription;
   updateDialogSubscription!: Subscription;
@@ -53,22 +55,38 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   addSingleBook(formData: FormData) {
-    this.connSer.addSingleBook(formData).subscribe((res) => this.savedBook.push(res[0]));
+    this.connSer.addSingleBook(formData).subscribe((res) => {
+    this.savedBook.push(res.books[0])
+    this.displayNotification(res.count); 
+    });
+  }
+
+  displayNotification(count:string){
+    if(count){
+      this.failure = false;
+      this.success = true;
+    } else {
+      this.success = false;
+      this.failure = true;
+    }
   }
 
   displayBooks(){
-    this.connSer.fetchBooks().subscribe((res) => this.savedBook  = res)
+    this.connSer.fetchBooks().subscribe((res) => 
+    {
+      this.savedBook  = res.books;
+    })
   }
 
   deleteBook(id: String){
     this.connSer.deleteBook(id).subscribe(res => {
       const removedBook  = this.savedBook.filter(array => array._id === id);
       this.savedBook.splice(this.savedBook.indexOf(removedBook[0]),1);
+      this.displayNotification(res.count); 
     });
   }
 
   updateRecord(book: book){
-
     const config = new MatDialogConfig();
     config.width  = '500px';
     config.data = book;
@@ -87,9 +105,10 @@ export class AppComponent implements OnInit, OnDestroy {
 
   updateSingleBook(formData: FormData) {
     this.connSer.updateBook(formData).subscribe((res) => { 
-      const updatedBook  = this.savedBook.filter(array => array._id === res[0]._id);
+      const updatedBook  = this.savedBook.filter(array => array._id === res.books[0]._id);
       const index = this.savedBook.indexOf(updatedBook[0]);
-      this.savedBook.splice(index,1,res[0]);
+      this.savedBook.splice(index,1,res.books[0]);
+      this.displayNotification(res.count); 
     });
   }
 }

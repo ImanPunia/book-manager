@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { book } from '../Models/bookSaved';
-import { deletedBook } from '../Models/removedBook';
+import { bookResponse } from '../Models/bookResponse';
 
 @Injectable({
   providedIn: 'root',
@@ -12,19 +12,19 @@ export class httpConnectionService {
 
   rootUrl = '/book';
 
-  addSingleBook(file: FormData): Observable<book[]> {
-    return this.http.post<book[]>(this.rootUrl + '/addBook', file);
+  addSingleBook(file: FormData): Observable<bookResponse> {
+    return this.http.post<bookResponse>(this.rootUrl + '/addBook', file);
   }
 
-  fetchBooks(): Observable<book[]>{
-    return this.http.get<book[]>(this.rootUrl + '/fetchBooks');
+  fetchBooks(): Observable<bookResponse>{
+    return this.http.get<bookResponse>(this.rootUrl + '/fetchBooks');
   }
 
-  deleteBook(id:String):Observable<deletedBook>{
-    return this.http.delete<deletedBook>(this.rootUrl + '/deleteBook/' + id);
+  deleteBook(id:String):Observable<bookResponse>{
+    return this.http.delete<bookResponse>(this.rootUrl + '/deleteBook/' + id);
   }
 
-  updateBook(data: FormData): Observable<book[]>{
-    return this.http.put<book[]>(this.rootUrl + '/updateBook',  data);
+  updateBook(data: FormData): Observable<bookResponse>{
+    return this.http.put<bookResponse>(this.rootUrl + '/updateBook',  data);
   }
 }

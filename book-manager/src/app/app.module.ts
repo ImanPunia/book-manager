@@ -15,6 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FileDirectiveDirective } from './directives/file-directive.directive';
 import { MatIconModule } from '@angular/material/icon';
 import { UxCardComponent } from './card/ux-card/ux-card.component';
+import { NotifierComponent } from './notifier/notifier/notifier.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { UxCardComponent } from './card/ux-card/ux-card.component';
     AddBookDialogComponent,
     FileDirectiveDirective,
     UxCardComponent,
+    NotifierComponent,
   ],
   imports: [
     BrowserModule,

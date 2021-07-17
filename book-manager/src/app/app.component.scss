@@ -6,3 +6,29 @@
 .outer{
     padding: 0.2rem;
 }
+
+.p-relative{
+    position: relative;
+}
+
+.p-absolute{
+    position: absolute;
+    bottom: 0;
+    right: 20px;
+    padding: 0.4rem;
+    top: 0;
+    position: absolute;
+    right: 20px;
+    height: 20px;
+    color: #fff;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.success-color{
+    background-color: #5d9359;
+}
+
+.failure-color{
+    background-color: #e42354;
+}
