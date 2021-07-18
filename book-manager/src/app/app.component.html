@@ -1,8 +1,9 @@
 <div class="root-container">
     <div>
-        <app-toolbar></app-toolbar>
+        <app-toolbar (sliderVisible) =  "showSlider($event)"></app-toolbar>
     </div>
     <div class="body-container">
+        <app-slider [show]="isVisible"></app-slider>
         <div class="p-relative">
             <app-notifier *ngIf="success">
                 <div class   = "notify success-color">

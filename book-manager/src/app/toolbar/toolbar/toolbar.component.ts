@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-toolbar',
@@ -7,9 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ToolbarComponent implements OnInit {
 
+  @Output() sliderVisible = new EventEmitter<boolean>();
+  clicked = false;
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  openSlider(){
+    this.clicked= !this.clicked;
+    this.sliderVisible.emit(this.clicked);
+  }
 }

@@ -19,6 +19,7 @@ import { NotifierComponent } from './notifier/notifier/notifier.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ToolbarComponent } from './toolbar/toolbar/toolbar.component';
 import { HighlightDirective } from './directives/highlight.directive';
+import { SliderComponent } from './slider/slider/slider.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { HighlightDirective } from './directives/highlight.directive';
     NotifierComponent,
     ToolbarComponent,
     HighlightDirective,
+    SliderComponent,
   ],
   imports: [
     BrowserModule,

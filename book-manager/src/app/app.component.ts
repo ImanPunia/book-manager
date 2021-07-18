@@ -15,6 +15,7 @@ export class AppComponent implements OnInit, OnDestroy {
   savedBook!: book[];
   success = false;
   failure = false; 
+  isVisible = false;
 
   openDialogSubscription: Subscription =  Subscription.EMPTY;
   updateDialogSubscription: Subscription = Subscription.EMPTY;
@@ -38,6 +39,10 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.displayBooks();
+  }
+
+  showSlider(show: boolean){
+    this.isVisible = show;
   }
 
   openDialog(): void {

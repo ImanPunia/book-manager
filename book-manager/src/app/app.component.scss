@@ -1,6 +1,7 @@
 .card-container{
     display: flex;
     flex-wrap: wrap;
+    padding-top: 2rem;;
 }
 
 .outer{
@@ -42,8 +43,4 @@
 .root-container{
     display: flex;
     flex-direction: column;
-}
-
-.body-container{
-    padding-top: 2rem;;
 }
