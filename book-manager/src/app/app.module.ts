@@ -16,6 +16,9 @@ import { FileDirectiveDirective } from './directives/file-directive.directive';
 import { MatIconModule } from '@angular/material/icon';
 import { UxCardComponent } from './card/ux-card/ux-card.component';
 import { NotifierComponent } from './notifier/notifier/notifier.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { ToolbarComponent } from './toolbar/toolbar/toolbar.component';
+import { HighlightDirective } from './directives/highlight.directive';
 
 @NgModule({
   declarations: [
@@ -25,6 +28,8 @@ import { NotifierComponent } from './notifier/notifier/notifier.component';
     FileDirectiveDirective,
     UxCardComponent,
     NotifierComponent,
+    ToolbarComponent,
+    HighlightDirective,
   ],
   imports: [
     BrowserModule,
@@ -37,6 +42,7 @@ import { NotifierComponent } from './notifier/notifier/notifier.component';
     MatButtonModule,
     HttpClientModule,
     MatIconModule,
+    MatTooltipModule
   ],
   providers: [],
   bootstrap: [AppComponent],

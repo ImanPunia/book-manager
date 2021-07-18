@@ -4,7 +4,8 @@
 }
 
 .outer{
-    padding: 0.2rem;
+    flex-basis: 20%;
+    overflow: hidden;
 }
 
 .p_l_03{
@@ -36,4 +37,13 @@
 
 .failure-color{
     background-color: #e42354;
+}
+
+.root-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.body-container{
+    padding-top: 2rem;;
 }

@@ -1,20 +1,20 @@
-<div class="layout">
+<div class="layout" appHighlight>
     <div class="card-body">
         <div class="cover-image">
             <img class="bg-img" [src]="imgSrc">
         </div>
-         <div> 
+         <div  class="footer"> 
              <div class="text">
-                <div class="book-name ellipsis" title="{{Book.name}}">{{Book.name}}</div>
+                <div class="book-name ellipsis" matTooltip="{{Book.name}}">{{Book.name}}</div>
                 <div class="book-description">
-                    <div class="author-name ellipsis" title="{{Book.author}}">{{Book.author}}</div>
+                    <div class="author-name ellipsis" matTooltip="{{Book.author}}">{{Book.author}}</div>
                     <div class = "copies">{{Book.copies}}</div>
                 </div>
                 <div class="volume"> vol. {{Book.volume}}</div>
                 <div class="icon-container">
                     <div mat-mini-fab class="icon">
-                        <mat-icon class="font_20" (click) = "editBook()">edit</mat-icon>
-                        <mat-icon class="font_20" (click) = "deleteBook()">delete</mat-icon>
+                        <mat-icon class="font_20"  (click) = "editBook()">edit</mat-icon>
+                        <mat-icon class="font_20"  (click) = "deleteBook()">delete</mat-icon>
                     </div>
                </div>
         </div>

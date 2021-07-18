@@ -1,4 +1,4 @@
-$app-color: rgb(142 98 226 / 87%);
+$app-color: black;
 $label-color: rgba(0, 0, 0, 0.54);
 
 mat-form-field {
@@ -15,6 +15,7 @@ mat-form-field {
 
 .box-shadow-0 {
   box-shadow: none;
+  color: white;
 }
 
 .light-grey {

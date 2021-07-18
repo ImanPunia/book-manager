@@ -1,29 +1,33 @@
-
-
-<button mat-button (click)="openDialog()">Add Book</button>
-<div class="p-relative">
-    <app-notifier *ngIf="success">
-        <div class   = "notify success-color">
-            <mat-icon>check_circle_outline</mat-icon>
-            <div class='p_l_03'>saved</div>
+<div class="root-container">
+    <div>
+        <app-toolbar></app-toolbar>
+    </div>
+    <div class="body-container">
+        <div class="p-relative">
+            <app-notifier *ngIf="success">
+                <div class   = "notify success-color">
+                    <mat-icon>check_circle_outline</mat-icon>
+                    <div class='p_l_03'>saved</div>
+                </div>
+            </app-notifier>
+            
+            <app-notifier *ngIf="failure">
+                <div class="notify failure-color">	
+                <mat-icon>error_outline</mat-icon>
+                <div class="p_l_03">Error while saving last entry</div>
+                </div>
+            </app-notifier>
         </div>
-    </app-notifier>
-    
-    <app-notifier *ngIf="failure">
-        <div class="notify failure-color">	
-           <mat-icon>error_outline</mat-icon>
-           <div class="p_l_03">Error while saving last entry</div>
+        
+        <div class="card-container">
+            <ng-container *ngFor = "let book of savedBook">
+                <div class="outer">
+                    <app-ux-card [book]="book" (deleted)="deleteBook($event)" (edit)="updateRecord($event)"></app-ux-card>
+                </div>
+            </ng-container>
         </div>
-    </app-notifier>
-</div>
-
-
-<div class="card-container">
-    <ng-container *ngFor = "let book of savedBook">
-        <div class="outer">
-            <app-ux-card [book]="book" (deleted)="deleteBook($event)" (edit)="updateRecord($event)"></app-ux-card>
-        </div>
-    </ng-container>
+    </div>
+    <!-- <button mat-button (click)="openDialog()">Add Book</button> -->
 </div>
 
 

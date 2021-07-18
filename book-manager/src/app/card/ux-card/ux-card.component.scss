@@ -1,28 +1,32 @@
 .layout{
     display: flex;
-    min-width: 250px;
     min-height: 300px;
-    width: 250px;
     height: 300px;
-    border: 1px #f3f0f08a solid;
-    border-radius: 5%;
+    border: 1px transparent solid;
+    min-width: 200px;
+    padding: 1.5rem;
 }
 
+.footer{
+    padding-top: 1rem;
+}
 
 .bg-img{
     object-fit: cover;
     height: 100%;
     width: 100%;
-    border: 1px transparent;
-    border-radius: 5%;
 }
 
 .card-body{
    display: flex;
    flex-direction: column;
-   padding: 0.5rem;
+   //padding: 1rem;
    width: 100%;
    min-width: 0;
+}
+
+.layout:hover{
+        border-color:  #a7a2a28a ;
 }
 
 .cover-image{
@@ -44,7 +48,7 @@
     font-style: italic;
     color: rgb(47 39 39 / 58%);
     padding-right: 0.3rem;
-    max-width: 70%;
+    max-width: 60%;
 }
 
 .copies{
@@ -76,7 +80,7 @@
 }
 
 .icon{
-    color: rgb(47 39 39 / 58%);
+    color: white;
 }
 
 .font_20{
