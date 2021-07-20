@@ -1,8 +1,4 @@
 <div class="root"  [ngClass] = "{transit:show}">
-    <div class="body">
-        <div class="child add"> Add Book</div>
-        <div class="child delete">Delete Multiple</div>
-        <div class="child history">History</div>
-        <div class="child logout">Log Out</div>
-    </div>
+    <ng-content></ng-content>
 </div>
+<div class = "slider-background" [ngClass] = "{showbackground:show}"></div>

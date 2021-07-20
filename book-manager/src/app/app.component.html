@@ -1,9 +1,16 @@
 <div class="root-container">
-    <div>
+    <div class="nav-outer">
         <app-toolbar (sliderVisible) =  "showSlider($event)"></app-toolbar>
     </div>
     <div class="body-container">
-        <app-slider [show]="isVisible"></app-slider>
+        <app-slider #slider>
+            <div class="slider-body">
+                <div class="child add"> Add Book</div>
+                <div class="child delete">Delete Multiple</div>
+                <div class="child history">History</div>
+                <div class="child logout">Log Out</div>
+            </div>
+        </app-slider>
         <div class="p-relative">
             <app-notifier *ngIf="success">
                 <div class   = "notify success-color">

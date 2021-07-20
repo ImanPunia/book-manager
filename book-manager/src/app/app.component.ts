@@ -1,9 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { httpConnectionService } from './service/httpConnection.service';
 import { AddBookDialogComponent } from './book-dialog/add-book-dialog/add-book-dialog.component';
 import { book } from './Models/bookSaved';
 import { Subscription } from 'rxjs';
+import { SliderComponent } from './slider/slider/slider.component';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +12,9 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit, OnDestroy {
+
+  @ViewChild('slider', {static: true}) slider!: SliderComponent;
+
   title = 'book-manager';
   savedBook!: book[];
   success = false;
@@ -42,7 +46,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   showSlider(show: boolean){
-    this.isVisible = show;
+    this.slider.toggleOpenShow().subscribe(res => {console.log(res)})
   }
 
   openDialog(): void {
@@ -52,7 +56,6 @@ export class AppComponent implements OnInit, OnDestroy {
 
     this.openDialogSubscription = dialogRef.afterClosed().subscribe((value) => {
       if (value != undefined) {
-        console.log(JSON.stringify(value));
         let formData = new FormData();
         formData.append('file', value.file);
         formData.append('data', JSON.stringify(value));
