@@ -6,12 +6,9 @@
         BOOK COLLECTION
     </div>
     <div class="nav w-100">
-        <div>
-            <a class="app-name text hover p-b-1">Books</a>
-        </div>
-        <div>
-            <a class="favourites text hover p-b-1"> Favourite</a>
-        </div>
+        <ng-container *ngFor = "let field of fields">
+            <app-field [fieldName] = "field"> </app-field>
+        </ng-container>
         <div>
             <a class="Recents text"> <mat-icon>notifications_none</mat-icon> </a>
         </div>

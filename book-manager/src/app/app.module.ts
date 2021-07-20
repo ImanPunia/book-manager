@@ -20,6 +20,9 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { ToolbarComponent } from './toolbar/toolbar/toolbar.component';
 import { HighlightDirective } from './directives/highlight.directive';
 import { SliderComponent } from './slider/slider/slider.component';
+import { FieldComponent } from './field/field/field.component';
+import { SliderTabComponent } from './slider-tab/slider-tab.component';
+
 
 @NgModule({
   declarations: [
@@ -32,6 +35,8 @@ import { SliderComponent } from './slider/slider/slider.component';
     ToolbarComponent,
     HighlightDirective,
     SliderComponent,
+    FieldComponent,
+    SliderTabComponent,
   ],
   imports: [
     BrowserModule,

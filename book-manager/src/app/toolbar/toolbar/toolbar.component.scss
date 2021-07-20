@@ -1,6 +1,7 @@
 $background-color: black;
-$text-color: white;
 $padding-1: 1rem;
+$text-color: white;
+
 
 .toolbar{
     width: 100%;
@@ -21,11 +22,6 @@ $padding-1: 1rem;
     align-items: center;
 }
 
-.text{
-    color:$text-color;
-    cursor:  pointer;
-}
-
 .brand-design{
     font-family: "Roboto";
     font-size: 1rem;
@@ -34,14 +30,6 @@ $padding-1: 1rem;
     color: $text-color;
     padding: 0.2rem;
 }
-
-.hover{
-    margin: 1rem;
-}
-
-.hover:hover {
-    border-bottom: 3px solid $text-color;
-  }
 
 .drawer{
     color: $text-color;
@@ -54,11 +42,10 @@ $padding-1: 1rem;
     margin-left: 2rem;
 }
 
-.app-name{
-    color: $text-color;
+.text{
+    color:$text-color;
+    cursor:  pointer;
 }
 
-.p-b-1{
-    padding-bottom: 1rem;
-}
+
 

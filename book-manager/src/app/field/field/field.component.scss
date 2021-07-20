@@ -1,0 +1,22 @@
+$text-color: white;
+
+.text{
+    color:$text-color;
+    cursor:  pointer;
+}
+
+.app-name{
+    color: $text-color;
+}
+
+.p-b-1{
+    padding-bottom: 1rem;
+}
+
+.hover{
+    margin: 1rem;
+}
+
+.hover:hover {
+    border-bottom: 3px solid $text-color;
+  }

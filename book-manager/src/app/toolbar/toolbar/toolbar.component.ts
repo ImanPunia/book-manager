@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { InterCommunicationService } from 'src/app/service/inter-communication.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -9,14 +10,16 @@ export class ToolbarComponent implements OnInit {
 
   @Output() sliderVisible = new EventEmitter<boolean>();
   clicked = false;
+  fields: string[] = this.inercomm.headerTypes;
 
-  constructor() { }
+  constructor(private readonly inercomm: InterCommunicationService) { }
 
   ngOnInit(): void {
+
   }
 
   openSlider(){
     this.clicked= !this.clicked;
-    this.sliderVisible.emit(this.clicked);
+    this.sliderVisible.emit();
   }
 }
