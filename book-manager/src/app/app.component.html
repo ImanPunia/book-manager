@@ -4,13 +4,18 @@
     </div>
     <div class="body-container">
         <app-slider #slider>
-            <div class="slider-body">
-                <div class="child add"> Add Book</div>
-                <div class="child delete">Delete Multiple</div>
-                <div class="child history">History</div>
-                <div class="child logout">Log Out</div>
-            </div>
+            <app-slider-tab *ngFor = "let nav of navs" [nav] = "nav">
+                <div class="child add">{{nav.name}}</div>
+            </app-slider-tab>
         </app-slider>
+        <app-slider-parent>
+            <app-page-content *ngFor= "let nav of navs" [ngSwitch] = 'nav.id' [index] = "nav.id">
+                <app-add-book *ngSwitchCase = 'sliderPageTypes.ADD_BOOK'></app-add-book>
+                <app-log-out  *ngSwitchCase =  'sliderPageTypes.LOG_OUT'></app-log-out>
+                <app-history  *ngSwitchCase = 'sliderPageTypes.HISTORY'></app-history>
+                <app-delete-multiple  *ngSwitchCase = 'sliderPageTypes.DELETE_MULTIPLE'></app-delete-multiple>
+            </app-page-content>
+        </app-slider-parent>
         <div class="p-relative">
             <app-notifier *ngIf="success">
                 <div class   = "notify success-color">
@@ -21,8 +26,8 @@
             
             <app-notifier *ngIf="failure">
                 <div class="notify failure-color">	
-                <mat-icon>error_outline</mat-icon>
-                <div class="p_l_03">Error while saving last entry</div>
+                    <mat-icon>error_outline</mat-icon>
+                    <div class="p_l_03">Error while saving last entry</div>
                 </div>
             </app-notifier>
         </div>
@@ -35,7 +40,6 @@
             </ng-container>
         </div>
     </div>
-    <!-- <button mat-button (click)="openDialog()">Add Book</button> -->
 </div>
 
 

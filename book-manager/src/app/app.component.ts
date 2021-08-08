@@ -5,6 +5,9 @@ import { AddBookDialogComponent } from './book-dialog/add-book-dialog/add-book-d
 import { book } from './Models/bookSaved';
 import { Subscription } from 'rxjs';
 import { SliderComponent } from './slider/slider/slider.component';
+import { InterCommunicationService, navTypes } from './service/inter-communication.service';
+import { sliderPageTypes } from'./enums/sliderPages';
+import { PageSwitchService } from './service/page-switch.service';
 
 @Component({
   selector: 'app-root',
@@ -15,11 +18,16 @@ export class AppComponent implements OnInit, OnDestroy {
 
   @ViewChild('slider', {static: true}) slider!: SliderComponent;
 
+  sliderPageTypes = sliderPageTypes;
+
   title = 'book-manager';
   savedBook!: book[];
+
   success = false;
   failure = false; 
   isVisible = false;
+
+  navs: navTypes[]  = this.inerCommSer.navTypes;
 
   openDialogSubscription: Subscription =  Subscription.EMPTY;
   updateDialogSubscription: Subscription = Subscription.EMPTY;
@@ -30,7 +38,9 @@ export class AppComponent implements OnInit, OnDestroy {
 
   constructor(
     public dialog: MatDialog,
-    readonly connSer: httpConnectionService
+    readonly connSer: httpConnectionService,
+    private readonly inerCommSer: InterCommunicationService,
+    private readonly pageSer: PageSwitchService
   ) {}
 
   ngOnDestroy(): void {
@@ -43,6 +53,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.displayBooks();
+    this.pageSer.navChangeSubject.subscribe((val) => console.log(val))
   }
 
   showSlider(show: boolean){

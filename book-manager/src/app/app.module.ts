@@ -22,6 +22,12 @@ import { HighlightDirective } from './directives/highlight.directive';
 import { SliderComponent } from './slider/slider/slider.component';
 import { FieldComponent } from './field/field/field.component';
 import { SliderTabComponent } from './slider-tab/slider-tab.component';
+import { DeleteMultipleComponent } from './sliderPages/delete-multiple/delete-multiple.component';
+import { AddBookComponent } from './sliderPages/add-book/add-book.component';
+import { LogOutComponent } from './sliderPages/log-out/log-out.component';
+import { PageContentComponent } from './page-content/page-content.component';
+import { HistoryComponent } from './sliderPages/history/history.component';
+import { SliderParentComponent } from './slider-parent/slider-parent.component';
 
 
 @NgModule({
@@ -37,6 +43,12 @@ import { SliderTabComponent } from './slider-tab/slider-tab.component';
     SliderComponent,
     FieldComponent,
     SliderTabComponent,
+    DeleteMultipleComponent,
+    AddBookComponent,
+    LogOutComponent,
+    PageContentComponent,
+    HistoryComponent,
+    SliderParentComponent,
   ],
   imports: [
     BrowserModule,
