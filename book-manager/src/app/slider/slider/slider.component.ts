@@ -18,7 +18,7 @@ export class SliderComponent implements OnInit, AfterViewInit, OnDestroy {
   @ContentChildren(SliderTabComponent) tabChildren!: SliderTabComponent[];
 
   constructor(private readonly pageSer: PageSwitchService) { }
-  
+
   ngOnDestroy(): void {
     if(this.childSubscriptions){
       this.childSubscriptions.unsubscribe();
@@ -27,12 +27,10 @@ export class SliderComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngAfterViewInit(): void {
     this.pageSer.registerNavTabs(this.tabChildren);
-    this.tabChildren.forEach(el => {
-      el.action.subscribe(val  => this.toggleOpenShow())
-    })
   }
 
   ngOnInit(): void { 
+    this.pageSer.actionEvent.subscribe((val) => this.toggleOpenShow())
   }
 
   toggleOpenShow():Observable<sliderState>{

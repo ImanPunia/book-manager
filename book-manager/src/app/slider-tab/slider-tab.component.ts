@@ -32,7 +32,7 @@ export class SliderTabComponent implements OnInit {
 
   showNavBody(){
     this.pageSer.switchNavPage(this.index);
-    this.action.emit(false);
+    this.pageSer.actionEvent.emit();
   }
 
 }

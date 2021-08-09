@@ -1,8 +1,7 @@
-import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { EventEmitter, Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 import { PageContentComponent } from '../page-content/page-content.component';
 import { SliderTabComponent } from '../slider-tab/slider-tab.component';
-import { sliderState } from '../slider/slider/slider.component';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +13,7 @@ export class PageSwitchService {
   activePage!: PageContentComponent;
 
   navChangeSubject: Subject<pageChange>  = new Subject<pageChange>();
+  actionEvent = new EventEmitter();
 
   constructor() { }
 
@@ -23,7 +23,7 @@ export class PageSwitchService {
     });
   }
 
-  registerNavBody(bodys: PageContentComponent[]){debugger;
+  registerNavBody(bodys: PageContentComponent[]){
     bodys.forEach(body => {
       this.navBody.push(body);
     });
@@ -69,7 +69,7 @@ export class PageSwitchService {
     return switched;
   }
 
-  switchNavBody(nextTabBody: PageContentComponent){debugger;
+  switchNavBody(nextTabBody: PageContentComponent){
     if(nextTabBody && nextTabBody !==  this.activePage){
       if(this.activePage){
         this.activePage.isActive  = false;
